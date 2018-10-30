@@ -1,0 +1,17 @@
+{
+    "name": "aonach/avp",
+    "description": "Amazon Vendor Program system",
+    "type": "project",
+    "require": {
+        "monolog/monolog": "^1.23",
+        "sabas/edifact": "^0.3.2"
+    },
+    "license": "GPL-3.0-only",
+    "authors": [
+        {
+            "name": "Aonach Nua",
+            "email": "dev@aonach.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
