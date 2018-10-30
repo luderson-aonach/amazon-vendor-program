@@ -1,17 +1,28 @@
 version: '3'
 services:
   web:
-    image: webdevops/php-nginx-dev:7.2
-    env_file: .env
+    build: ./build/nginx/
     ports:
       - 80:80
       - 443:443
     volumes:
-      - ./src:/app
+      - ./src:/var/www/html
+      - ./config/nginx:/etc/nginx
+    depends_on:
+      - php
     networks:
       - frontend
       - backend
-
+  php:
+    build: ./build/php/
+    env_file: .env
+    volumes:
+      - ./src:/var/www/html/
+      - ./config/php/conf.d/docker-php-ext-opcache.ini:/usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
+      - ./config/php/conf.d/docker-php-ext-xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+      - ./config/php/php.ini:/usr/local/etc/php/php.ini
+    networks:
+      - backend
 networks:
   frontend:
     driver: bridge
